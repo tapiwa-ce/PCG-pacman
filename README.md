@@ -15,7 +15,9 @@ The project was implemented using the **Godot Engine** and builds upon the open-
 A gameplay video demonstrating the procedural systems can be added here.
 
 
-![Gameplay Demo](media/gameplay_demo.gif)
+<p align="center">
+  <img src="media/gameplay_demo.gif" width="500">
+</p>
 
 The gameplay demonstration should highlight the following features:
 
