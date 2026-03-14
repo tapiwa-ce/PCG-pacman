@@ -83,6 +83,7 @@ These variations significantly influence enemy movement patterns and interceptio
 <p align="center">
 <img src="media/enemy_parameters.png" width="400">
 </p>
+
 ---
 
 ## Assassin Teleportation System
