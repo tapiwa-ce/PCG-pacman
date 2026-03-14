@@ -1,0 +1,221 @@
+[gd_scene load_steps=23 format=4 uid="uid://cbv40bjrx6t5h"]
+
+[ext_resource type="Script" uid="uid://caiyu4tr71bx" path="res://scripts/level.gd" id="1_tf7gw"]
+[ext_resource type="TileSet" uid="uid://bykst8ba6525q" path="res://resources/tile-sets/tile_set.tres" id="2_lp2ca"]
+[ext_resource type="PackedScene" uid="uid://c4s65vdj85p3j" path="res://scenes/pickables/pellet.tscn" id="4_g8q31"]
+[ext_resource type="PackedScene" uid="uid://b1mdnhyr4s07r" path="res://scenes/actors/player.tscn" id="4_u33na"]
+[ext_resource type="PackedScene" uid="uid://cvamjms4o581j" path="res://scenes/bonus_items.tscn" id="7_eb02v"]
+[ext_resource type="PackedScene" uid="uid://df7iwsowjq02v" path="res://scenes/enemies.tscn" id="8_v5yh8"]
+[ext_resource type="PackedScene" uid="uid://d2ybva0trn51" path="res://scenes/pickables/bonus_item.tscn" id="8_wkukv"]
+[ext_resource type="PackedScene" uid="uid://borrvnekx8vht" path="res://scenes/shared_enemy_ai.tscn" id="9_qqr5i"]
+[ext_resource type="PackedScene" uid="uid://d35gi8b3l2nhh" path="res://scenes/pellets.tscn" id="9_soaal"]
+[ext_resource type="PackedScene" uid="uid://c1v0tqqh2nfa5" path="res://scenes/actors/enemy_bourrin.tscn" id="10_so184"]
+[ext_resource type="PackedScene" uid="uid://bpsnuln5keu2o" path="res://scenes/pickables/power_pellet.tscn" id="11_7tp22"]
+[ext_resource type="PackedScene" uid="uid://c5mkv72mwdf1m" path="res://scenes/actors/enemy_chelou.tscn" id="11_76jps"]
+[ext_resource type="PackedScene" uid="uid://dygx4p6tgp465" path="res://scenes/actors/enemy_assassin.tscn" id="12_yei6x"]
+[ext_resource type="PackedScene" uid="uid://bly5qwucu3w3c" path="res://scenes/actors/enemy_cornichon.tscn" id="13_vj81d"]
+[ext_resource type="PackedScene" uid="uid://di40nd36u435f" path="res://scenes/warp_zone.tscn" id="13_y6vvr"]
+[ext_resource type="PackedScene" uid="uid://bxd0v1wymn05u" path="res://scenes/ui/info_message_ui.tscn" id="14_86j3b"]
+[ext_resource type="PackedScene" uid="uid://c57ttid6qs2wq" path="res://scenes/ui/lives_ui.tscn" id="15_4lnah"]
+[ext_resource type="PackedScene" uid="uid://dlhrc3i31nciu" path="res://scenes/ui/bonus_items_ui.tscn" id="16_05h1i"]
+[ext_resource type="PackedScene" uid="uid://cs15hy7ubikhu" path="res://autoloads/scenes/audio_manager.tscn" id="17_jqn07"]
+[ext_resource type="PackedScene" uid="uid://dlo622cpqxke0" path="res://scenes/ui/pause_menu_ui.tscn" id="18_h5lr1"]
+[ext_resource type="Script" uid="uid://1wwjprhlx4iu" path="res://scripts/PCG_Factory/pcg_manager.gd" id="21_4ab0e"]
+[ext_resource type="Script" uid="uid://dk2pky578f4oh" path="res://scenes/levels/pcg_map_generator.gd" id="22_p62il"]
+
+[node name="Level" type="Node2D"]
+position = Vector2(-2, 0)
+script = ExtResource("1_tf7gw")
+id = 1
+next_level_to_load_file_path = "res://scenes/ui/main_menu_ui.tscn"
+
+[node name="SwitchToNextLevelTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+modulate = Color(0, 0.360784, 0.376471, 1)
+position = Vector2(2, 3)
+tile_map_data = PackedByteArray("AAACABYAAAABAAQAAAABABYAAAABAAQAAAAAABYAAAABAAQAAAADABYAAAABAAQAAAAEABYAAAABAAQAAAAFABYAAAABAAQAAAAGABYAAAABAAQAAAAHABYAAAABAAQAAAAIABYAAAABAAQAAAAJABYAAAABAAQAAAAKABYAAAABAAQAAAALABYAAAABAAQAAAAMABYAAAABAAQAAAANABYAAAABAAQAAAAOABYAAAABAAQAAAAPABYAAAABAAQAAAAQABYAAAABAAQAAAARABYAAAABAAQAAAASABYAAAABAAQAAAATABYAAAABAAQAAAAUABYAAAABAAQAAAAVABYAAAABAAQAAAAWABYAAAABAAQAAAAXABYAAAABAAQAAAAYABYAAAABAAQAAAAZABYAAAABAAQAAAAaABYAAAABAAQAAAAbABYAAAABAAQAAAAcABYAAAABAAQAAAAdABYAAAABAAQAAAAeABYAAAABAAQAAAAfABYAAAABAAQAAAAgABYAAAABAAQAAAAhABYAAAABAAQAAAAiABYAAAABAAQAAAAjABYAAAABAAQAAAAkABYAAAABAAQAAAAlABYAAAABAAQAAAAmABYAAAABAAQAAAAnABYAAAABAAQAAAAAAAEAAAABAAQAAAAAAAIAAAABAAQAAAAAAAMAAAABAAQAAAAAAAQAAAABAAQAAAAAAAUAAAABAAQAAAAAAAYAAAABAAQAAAAAAAcAAAABAAQAAAAAAAgAAAABAAQAAAAAAAkAAAABAAQAAAAAAAoAAAABAAQAAAAAAAwAAAABAAQAAAAAAA0AAAABAAQAAAAAAA4AAAABAAQAAAAAAA8AAAABAAQAAAAAABAAAAABAAQAAAAAABEAAAABAAQAAAAAABIAAAABAAQAAAAAABMAAAABAAQAAAAAABQAAAABAAQAAAAAABUAAAABAAQAAAABAAEAAAABAAQAAAABAAIAAAABAAQAAAABAAMAAAABAAQAAAABAAQAAAABAAQAAAABAAUAAAABAAQAAAABAAYAAAABAAQAAAABAAcAAAABAAQAAAABAAgAAAABAAQAAAABAAkAAAABAAQAAAABAAoAAAABAAQAAAABAAwAAAABAAQAAAABAA0AAAABAAQAAAABAA4AAAABAAQAAAABAA8AAAABAAQAAAABABAAAAABAAQAAAABABEAAAABAAQAAAABABIAAAABAAQAAAABABMAAAABAAQAAAABABQAAAABAAQAAAABABUAAAABAAQAAAACAAEAAAABAAQAAAACAAMAAAABAAQAAAACAAQAAAABAAQAAAACAAUAAAABAAQAAAACAAYAAAABAAQAAAACAAcAAAABAAQAAAACAAgAAAABAAQAAAACAAkAAAABAAQAAAACAAwAAAABAAQAAAACAA0AAAABAAQAAAACAA4AAAABAAQAAAACAA8AAAABAAQAAAACABAAAAABAAQAAAACABEAAAABAAQAAAACABIAAAABAAQAAAACABMAAAABAAQAAAACABQAAAABAAQAAAACABUAAAABAAQAAAADAAEAAAABAAQAAAAEAAEAAAABAAQAAAAFAAEAAAABAAQAAAAGAAEAAAABAAQAAAAHAAEAAAABAAQAAAAIAAEAAAABAAQAAAAJAAEAAAABAAQAAAAKAAEAAAABAAQAAAALAAEAAAABAAQAAAAMAAEAAAABAAQAAAANAAEAAAABAAQAAAAOAAEAAAABAAQAAAAPAAEAAAABAAQAAAAQAAEAAAABAAQAAAARAAEAAAABAAQAAAARAAoAAAABAAQAAAARAAsAAAABAAQAAAARAAwAAAABAAQAAAASAAEAAAABAAQAAAASAAoAAAABAAQAAAASAAwAAAABAAQAAAATAAEAAAABAAQAAAATAAwAAAABAAQAAAAUAAEAAAABAAQAAAAUAAwAAAABAAQAAAAVAAEAAAABAAQAAAAVAAoAAAABAAQAAAAVAAwAAAABAAQAAAAWAAEAAAABAAQAAAAWAAoAAAABAAQAAAAWAAsAAAABAAQAAAAWAAwAAAABAAQAAAAXAAEAAAABAAQAAAAYAAEAAAABAAQAAAAZAAEAAAABAAQAAAAaAAEAAAABAAQAAAAbAAEAAAABAAQAAAAcAAEAAAABAAQAAAAdAAEAAAABAAQAAAAeAAEAAAABAAQAAAAfAAEAAAABAAQAAAAgAAEAAAABAAQAAAAhAAEAAAABAAQAAAAiAAEAAAABAAQAAAAjAAEAAAABAAQAAAAlAAEAAAABAAQAAAAlAAIAAAABAAQAAAAlAAMAAAABAAQAAAAlAAQAAAABAAQAAAAlAAUAAAABAAQAAAAlAAYAAAABAAQAAAAlAAcAAAABAAQAAAAlAAgAAAABAAQAAAAlAAkAAAABAAQAAAAlAAoAAAABAAQAAAAlAAwAAAABAAQAAAAlAA0AAAABAAQAAAAlAA4AAAABAAQAAAAlAA8AAAABAAQAAAAlABAAAAABAAQAAAAlABEAAAABAAQAAAAlABIAAAABAAQAAAAlABMAAAABAAQAAAAlABQAAAABAAQAAAAlABUAAAABAAQAAAAmAAEAAAABAAQAAAAmAAIAAAABAAQAAAAmAAMAAAABAAQAAAAmAAQAAAABAAQAAAAmAAUAAAABAAQAAAAmAAYAAAABAAQAAAAmAAcAAAABAAQAAAAmAAgAAAABAAQAAAAmAAkAAAABAAQAAAAmAAoAAAABAAQAAAAmAAwAAAABAAQAAAAmAA0AAAABAAQAAAAmAA4AAAABAAQAAAAmAA8AAAABAAQAAAAmABAAAAABAAQAAAAmABEAAAABAAQAAAAmABIAAAABAAQAAAAmABMAAAABAAQAAAAmABQAAAABAAQAAAAmABUAAAABAAQAAAAnAAEAAAABAAQAAAAnAAIAAAABAAQAAAAnAAMAAAABAAQAAAAnAAQAAAABAAQAAAAnAAUAAAABAAQAAAAnAAYAAAABAAQAAAAnAAcAAAABAAQAAAAnAAgAAAABAAQAAAAnAAkAAAABAAQAAAAnAAoAAAABAAQAAAAnAAwAAAABAAQAAAAnAA0AAAABAAQAAAAnAA4AAAABAAQAAAAnAA8AAAABAAQAAAAnABAAAAABAAQAAAAnABEAAAABAAQAAAAnABIAAAABAAQAAAAnABMAAAABAAQAAAAnABQAAAABAAQAAAAnABUAAAABAAQAAAAAAAAAAAABAAQAAAABAAAAAAABAAQAAAACAAAAAAABAAQAAAADAAAAAAABAAQAAAAEAAAAAAABAAQAAAAFAAAAAAABAAQAAAAGAAAAAAABAAQAAAAHAAAAAAABAAQAAAAIAAAAAAABAAQAAAAJAAAAAAABAAQAAAAKAAAAAAABAAQAAAALAAAAAAABAAQAAAAMAAAAAAABAAQAAAANAAAAAAABAAQAAAAOAAAAAAABAAQAAAAPAAAAAAABAAQAAAAQAAAAAAABAAQAAAARAAAAAAABAAQAAAASAAAAAAABAAQAAAATAAAAAAABAAQAAAAUAAAAAAABAAQAAAAVAAAAAAABAAQAAAAWAAAAAAABAAQAAAAXAAAAAAABAAQAAAAYAAAAAAABAAQAAAAZAAAAAAABAAQAAAAaAAAAAAABAAQAAAAbAAAAAAABAAQAAAAcAAAAAAABAAQAAAAdAAAAAAABAAQAAAAeAAAAAAABAAQAAAAfAAAAAAABAAQAAAAgAAAAAAABAAQAAAAhAAAAAAABAAQAAAAiAAAAAAABAAQAAAAjAAAAAAABAAQAAAAlAAAAAAABAAQAAAAmAAAAAAABAAQAAAAnAAAAAAABAAQAAAAAAAsAAAAAAAIAAAABAAsAAAAAAAIAAAACAAsAAAAAAAIAAAAHAAsAAAAAAAIAAAAIAAsAAAAAAAIAAAAQAA0AAAAAAAIAAAAQAAwAAAAAAAIAAAAQAAsAAAAAAAIAAAAQAAoAAAAAAAIAAAAQAAkAAAAAAAIAAAARAAkAAAAAAAIAAAASAAkAAAAAAAIAAAASAAcAAAAAAAIAAAARAAcAAAAAAAIAAAANAAUAAAAAAAIAAAAMAAUAAAAAAAIAAAASAAUAAAAAAAIAAAARAAUAAAAAAAIAAAAbAAQAAAAAAAIAAAAaAAUAAAAAAAIAAAAZAAUAAAAAAAIAAAAYAAUAAAAAAAIAAAAXAAcAAAAAAAIAAAAWAAcAAAAAAAIAAAAVAAkAAAAAAAIAAAAUAAkAAAAAAAIAAAATAAkAAAAAAAIAAAATAAoAAAAAAAIAAAASAAsAAAAAAAIAAAAUAAsAAAAAAAIAAAAUAAoAAAAAAAIAAAAWAAkAAAAAAAIAAAAXAAkAAAAAAAIAAAAXAAoAAAAAAAIAAAAXAAsAAAAAAAIAAAAXAAwAAAAAAAIAAAAXAA0AAAAAAAIAAAAWAA0AAAAAAAIAAAAVAA0AAAAAAAIAAAAUAA0AAAAAAAIAAAATAA0AAAAAAAIAAAASAA0AAAAAAAIAAAARAA0AAAAAAAIAAAAQAA4AAAAAAAIAAAAOAA8AAAAAAAIAAAANAAkAAAAAAAIAAAALAAkAAAAAAAIAAAADAAMAAAAAAAIAAAADAAQAAAAAAAIAAAADAAUAAAAAAAIAAAAKAAUAAAAAAAIAAAALAAUAAAAAAAIAAAAKAA0AAAAAAAIAAAAIAAwAAAAAAAIAAAAGAA8AAAAAAAIAAAAGAA4AAAAAAAIAAAAGAA0AAAAAAAIAAAAFAA8AAAAAAAIAAAADAA8AAAAAAAIAAAADABAAAAAAAAIAAAADABEAAAAAAAIAAAAEABEAAAAAAAIAAAAEABIAAAAAAAIAAAAEABMAAAAAAAIAAAADABMAAAAAAAIAAAADABUAAAABAAQAAAAEABUAAAABAAQAAAAFABUAAAABAAQAAAAGABUAAAABAAQAAAAIABUAAAABAAQAAAAJABUAAAABAAQAAAAKABUAAAABAAQAAAAKABMAAAAAAAIAAAAJABMAAAAAAAIAAAAIABMAAAAAAAIAAAAIABEAAAAAAAIAAAAHABEAAAAAAAIAAAAGABAAAAAAAAIAAAALABEAAAAAAAIAAAANAA8AAAAAAAIAAAAOABMAAAAAAAIAAAANABMAAAAAAAIAAAAMABMAAAAAAAIAAAAMABUAAAABAAQAAAALABUAAAABAAQAAAANABUAAAABAAQAAAAOABUAAAABAAQAAAAPABUAAAABAAQAAAAQABUAAAABAAQAAAATABEAAAAAAAIAAAAUABEAAAAAAAIAAAAXABMAAAAAAAIAAAAVABQAAAAAAAIAAAAXABUAAAABAAQAAAAYABUAAAABAAQAAAAZABUAAAABAAQAAAAaABUAAAABAAQAAAAbABUAAAABAAQAAAAbAA8AAAAAAAIAAAAaAA8AAAAAAAIAAAAbAA0AAAAAAAIAAAAbAAwAAAAAAAIAAAAbAAsAAAAAAAIAAAAaAAkAAAAAAAIAAAAbAAgAAAAAAAIAAAAZAAYAAAAAAAIAAAAfAAUAAAAAAAIAAAAfAAIAAAAAAAIAAAAgAAIAAAAAAAIAAAAhAAIAAAAAAAIAAAAhAAUAAAAAAAIAAAAhAAgAAAAAAAIAAAAhAAkAAAAAAAIAAAAhAAoAAAAAAAIAAAAhAAsAAAAAAAIAAAAfAAoAAAAAAAIAAAAfAAgAAAAAAAIAAAAdAAoAAAAAAAIAAAAfAAwAAAAAAAIAAAAcAA0AAAAAAAIAAAAcABUAAAABAAQAAAAjABUAAAABAAQAAAAkABUAAAABAAQAAAAkABQAAAAAAAIAAAAhAAwAAAAAAAIAAAAlAAsAAAAAAAIAAAAmAAsAAAAAAAIAAAAnAAsAAAAAAAIAAAAiAAIAAAAAAAIAAAAYAAsAAAAAAAIAAAAWAA8AAAAAAAIAAAAGAAsAAAAAAAIAAAAoAAsAAAAAAAIAAAAoAAoAAAABAAQAAAAoAAwAAAABAAQAAAApAAwAAAABAAQAAAApAAsAAAABAAQAAAApAAoAAAABAAQAAAAqAAsAAAABAAQAAAArAAsAAAABAAQAAAAsAAsAAAABAAQAAAAsAAwAAAABAAQAAAArAAwAAAABAAQAAAAqAAwAAAABAAQAAAAqAAoAAAABAAQAAAArAAoAAAABAAQAAAAsAAoAAAABAAQAAAD7/wwAAAABAAQAAAD8/woAAAABAAQAAAD8/wsAAAABAAQAAAD8/wwAAAABAAQAAAD9/woAAAABAAQAAAD9/wsAAAABAAQAAAD9/wwAAAABAAQAAAD+/woAAAABAAQAAAD+/wsAAAABAAQAAAD+/wwAAAABAAQAAAD//woAAAABAAQAAAD//wsAAAAAAAIAAAD//wwAAAABAAQAAAATAAsAAAAAAAIAAAACAAIAAAABAAQAAAAUABUAAAABAAQAAAAVABUAAAABAAQAAAAWABUAAAABAAQAAAAdABUAAAABAAQAAAAiABUAAAABAAQAAAAhABUAAAABAAQAAAAgABUAAAABAAQAAAAfABUAAAABAAQAAAAeABUAAAABAAQAAAAKABQAAAAAAAIAAAARABUAAAABAAQAAAASABUAAAABAAQAAAATABUAAAABAAQAAAAEAAIAAAAAAAIAAAADAAIAAAAAAAIAAAAFAAIAAAAAAAIAAAAGAAIAAAAAAAIAAAAHAAIAAAAAAAIAAAAIAAIAAAAAAAIAAAAJAAIAAAAAAAIAAAAVAAIAAAAAAAIAAAAWAAIAAAAAAAIAAAAXAAIAAAAAAAIAAAAYAAIAAAAAAAIAAAAZAAIAAAAAAAIAAAAaAAIAAAAAAAIAAAAbAAIAAAAAAAIAAAAjAAIAAAAAAAIAAAAkAAIAAAAAAAIAAAAkAAMAAAAAAAIAAAAkAAQAAAAAAAIAAAAkAAUAAAAAAAIAAAAkAAEAAAABAAQAAAAkAAAAAAABAAQAAAD7/woAAAABAAQAAAD7/wsAAAABAAQAAAACAAoAAAABAAQAAAAHABUAAAABAAQAAAAhAA4AAAAAAAIAAAAhAA8AAAAAAAIAAAAhABEAAAAAAAIAAAAhABIAAAAAAAIAAAAhAA0AAAAAAAIAAAA=")
+tile_set = ExtResource("2_lp2ca")
+rendering_quadrant_size = 48
+
+[node name="PlayerSpawnPoint" type="Marker2D" parent="."]
+position = Vector2(960, 840)
+
+[node name="EnemiesSpawnPoints" type="Node" parent="."]
+
+[node name="Marker2D" type="Marker2D" parent="EnemiesSpawnPoints"]
+position = Vector2(960, 456)
+
+[node name="Marker2D2" type="Marker2D" parent="EnemiesSpawnPoints"]
+position = Vector2(888, 552)
+
+[node name="Marker2D3" type="Marker2D" parent="EnemiesSpawnPoints"]
+position = Vector2(960, 552)
+
+[node name="Marker2D4" type="Marker2D" parent="EnemiesSpawnPoints"]
+position = Vector2(1032, 552)
+
+[node name="Pickables" type="Node" parent="."]
+
+[node name="Pellets" parent="Pickables" instance=ExtResource("9_soaal")]
+normal_pellet_scene = ExtResource("4_g8q31")
+power_pellet_scene = ExtResource("11_7tp22")
+
+[node name="BonusItems" parent="Pickables" instance=ExtResource("7_eb02v")]
+
+[node name="BonusItem" parent="Pickables/BonusItems" instance=ExtResource("8_wkukv")]
+position = Vector2(960, 648)
+
+[node name="Actors" type="Node" parent="."]
+
+[node name="Players" type="Node" parent="Actors"]
+
+[node name="Player" parent="Actors/Players" node_paths=PackedStringArray("spawn_point") instance=ExtResource("4_u33na")]
+position = Vector2(960, 840)
+spawn_point = NodePath("../../../PlayerSpawnPoint")
+
+[node name="Enemies" parent="Actors" instance=ExtResource("8_v5yh8")]
+
+[node name="EnemyBourrin" parent="Actors/Enemies" node_paths=PackedStringArray("spawn_point") instance=ExtResource("10_so184")]
+position = Vector2(960, 456)
+spawn_point = NodePath("../../../EnemiesSpawnPoints/Marker2D")
+
+[node name="EnemyChelou" parent="Actors/Enemies" node_paths=PackedStringArray("spawn_point") instance=ExtResource("11_76jps")]
+position = Vector2(888, 552)
+spawn_point = NodePath("../../../EnemiesSpawnPoints/Marker2D2")
+
+[node name="EnemyAssassin" parent="Actors/Enemies" node_paths=PackedStringArray("spawn_point") instance=ExtResource("12_yei6x")]
+position = Vector2(960, 552)
+spawn_point = NodePath("../../../EnemiesSpawnPoints/Marker2D3")
+
+[node name="EnemyCornichon" parent="Actors/Enemies" node_paths=PackedStringArray("spawn_point") instance=ExtResource("13_vj81d")]
+position = Vector2(1032, 552)
+spawn_point = NodePath("../../../EnemiesSpawnPoints/Marker2D4")
+
+[node name="SharedEnemyAI" parent="." instance=ExtResource("9_qqr5i")]
+
+[node name="WarpZones" type="Node" parent="."]
+
+[node name="Zones" type="Node" parent="WarpZones"]
+
+[node name="WarpZone" parent="WarpZones/Zones" node_paths=PackedStringArray("warp_destination_node") instance=ExtResource("13_y6vvr")]
+position = Vector2(-48, 552)
+warp_destination_node = NodePath("../../Destinations/WarpZoneDestination")
+
+[node name="WarpZone2" parent="WarpZones/Zones" node_paths=PackedStringArray("warp_destination_node") instance=ExtResource("13_y6vvr")]
+position = Vector2(1968, 552)
+warp_destination_node = NodePath("../../Destinations/WarpZoneDestination2")
+
+[node name="Destinations" type="Node" parent="WarpZones"]
+
+[node name="WarpZoneDestination" type="Marker2D" parent="WarpZones/Destinations"]
+position = Vector2(1920, 552)
+
+[node name="WarpZoneDestination2" type="Marker2D" parent="WarpZones/Destinations"]
+position = Vector2(0, 552)
+
+[node name="AIWaypoints" type="Node" parent="."]
+
+[node name="EnemiesHome" type="Marker2D" parent="AIWaypoints"]
+position = Vector2(960, 552)
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="ScatterPoints" type="Node2D" parent="AIWaypoints"]
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Marker2D" type="Marker2D" parent="AIWaypoints/ScatterPoints"]
+position = Vector2(504, 264)
+
+[node name="Marker2D2" type="Marker2D" parent="AIWaypoints/ScatterPoints"]
+position = Vector2(504, 120)
+
+[node name="Marker2D3" type="Marker2D" parent="AIWaypoints/ScatterPoints"]
+position = Vector2(168, 120)
+
+[node name="Marker2D4" type="Marker2D" parent="AIWaypoints/ScatterPoints"]
+position = Vector2(168, 264)
+
+[node name="ScatterPoints2" type="Node2D" parent="AIWaypoints"]
+position = Vector2(1250, 0)
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Marker2D" type="Marker2D" parent="AIWaypoints/ScatterPoints2"]
+position = Vector2(166, 264)
+
+[node name="Marker2D2" type="Marker2D" parent="AIWaypoints/ScatterPoints2"]
+position = Vector2(166, 120)
+
+[node name="Marker2D3" type="Marker2D" parent="AIWaypoints/ScatterPoints2"]
+position = Vector2(502, 120)
+
+[node name="Marker2D4" type="Marker2D" parent="AIWaypoints/ScatterPoints2"]
+position = Vector2(502, 264)
+
+[node name="ScatterPoints3" type="Node2D" parent="AIWaypoints"]
+position = Vector2(0, 767)
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Marker2D" type="Marker2D" parent="AIWaypoints/ScatterPoints3"]
+position = Vector2(360, 73)
+
+[node name="Marker2D2" type="Marker2D" parent="AIWaypoints/ScatterPoints3"]
+position = Vector2(168, 265)
+
+[node name="Marker2D3" type="Marker2D" parent="AIWaypoints/ScatterPoints3"]
+position = Vector2(504, 265)
+
+[node name="ScatterPoints4" type="Node2D" parent="AIWaypoints"]
+position = Vector2(1197, 767)
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Marker2D" type="Marker2D" parent="AIWaypoints/ScatterPoints4"]
+position = Vector2(363, 73)
+
+[node name="Marker2D2" type="Marker2D" parent="AIWaypoints/ScatterPoints4"]
+position = Vector2(555, 265)
+
+[node name="Marker2D3" type="Marker2D" parent="AIWaypoints/ScatterPoints4"]
+position = Vector2(219, 265)
+
+[node name="InGameUI" type="CanvasLayer" parent="."]
+
+[node name="InfoMessageUI" parent="InGameUI" instance=ExtResource("14_86j3b")]
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="LivesUI" parent="InGameUI" instance=ExtResource("15_4lnah")]
+offset_left = 399.0
+offset_top = 19.0
+offset_right = 522.0
+offset_bottom = 67.0
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="BonusItemsUI" parent="InGameUI" instance=ExtResource("16_05h1i")]
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="PauseMenuUi" parent="InGameUI" instance=ExtResource("18_h5lr1")]
+visible = false
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="AudioManager" parent="." instance=ExtResource("17_jqn07")]
+
+[node name="PCGManager" type="Node" parent="."]
+script = ExtResource("21_4ab0e")
+
+[node name="PCGMapGenerator" type="Node2D" parent="."]
+script = ExtResource("22_p62il")
+
+[connection signal="timeout" from="SwitchToNextLevelTimer" to="." method="_on_switch_to_next_level_timer_timeout"]
+
+[editable path="Pickables/Pellets"]
+[editable path="Pickables/BonusItems"]

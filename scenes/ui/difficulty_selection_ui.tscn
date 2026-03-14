@@ -1,0 +1,46 @@
+[gd_scene load_steps=2 format=3 uid="uid://y77tiqbb52l6"]
+
+[ext_resource type="Script" uid="uid://bjcts3wkcmsjt" path="res://scripts/ui/difficulty_selection_ui.gd" id="1_auq5r"]
+
+[node name="DifficultySelectionUI" type="Panel"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("1_auq5r")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.3
+anchor_right = 0.5
+anchor_bottom = 0.7
+offset_left = -240.0
+offset_top = -124.0
+offset_bottom = -370.0
+scale = Vector2(2, 2)
+theme_override_constants/separation = 16
+script = ExtResource("1_auq5r")
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Select Difficulty"
+
+[node name="EasyButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Easy"
+script = ExtResource("1_auq5r")
+
+[node name="MediumButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Medium"
+script = ExtResource("1_auq5r")
+
+[node name="HardButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Hard"
+script = ExtResource("1_auq5r")
+
+[connection signal="pressed" from="VBoxContainer/EasyButton" to="VBoxContainer" method="_on_easy_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/MediumButton" to="VBoxContainer/MediumButton" method="_on_medium_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HardButton" to="VBoxContainer/HardButton" method="_on_hard_button_pressed"]
