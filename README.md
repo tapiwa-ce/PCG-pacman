@@ -31,7 +31,9 @@ The procedural framework is organized around a **central PCG Manager** responsib
 
 These systems operate independently but are seeded from the same difficulty-based random seed to ensure deterministic procedural outcomes.
 
-![PCG Architecture](media/pcg_architecture.png)
+<p align="center">
+<img src="media/pcg_architecture.png" width="600">
+</p>
 
 Core procedural components include:
 
@@ -57,7 +59,9 @@ Key properties of the maze generator:
 - Structural constraints preventing walls on mirror axes
 - Balanced corridor density to preserve arcade-style navigation
 
-![Maze Generation Process](media/maze_generation.png)
+<p align="center">
+<img src="media/maze_generation.png" width="600">
+</p>
 
 ---
 
@@ -76,7 +80,9 @@ Procedurally generated parameters include:
 
 These variations significantly influence enemy movement patterns and interception behavior while maintaining the recognizable characteristics of each enemy archetype.
 
-![Enemy Parameter Variation](media/enemy_parameters.png)
+<p align="center">
+<img src="media/enemy_parameters.png" width="600">
+</p>
 ---
 
 ## Assassin Teleportation System
@@ -97,7 +103,9 @@ To maintain fairness, several constraints are applied:
 
 These constraints ensure that teleportation increases tension without becoming unpredictable or unfair.
 
-![Teleportation Behavior](media/assasin_teleport.png)
+<p align="center">
+<img src="media/assasin_teleport.png" width="600">
+</p>
 
 ---
 
@@ -116,7 +124,9 @@ Rare pellet counts scale with difficulty:
 Although the number of rare pellets varies by difficulty, the **total score obtainable from rare pellets remains constant**, concentrating rewards into fewer pickups at higher difficulty levels.
 
 
-![Golden Pellets](media/golden_pellets.png)
+<p align="center">
+<img src="media/golden_pellets.png" width="600">
+</p>
 
 ---
 
