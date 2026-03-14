@@ -15,11 +15,7 @@ The project was implemented using the **Godot Engine** and builds upon the open-
 A gameplay video demonstrating the procedural systems can be added here.
 
 
-<p align="center">
-<a href="https://raw.githubusercontent.com/tapiwa-ce/PCG-pacman/main/media/gameplay_demo.mp4">
-<img src="media/gameplay_thumbnail.png" width="700">
-</a>
-</p>
+![Gameplay Demo](media/gameplay_demo.gif)
 
 The gameplay demonstration should highlight the following features:
 
